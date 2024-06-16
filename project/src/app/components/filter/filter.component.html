@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="filter">
+    <h2>დეტალური ძებნა</h2>
+    <p>სკოლის მოძებნა შესაძლებელია საძიებო ველისა და რუკის დახმარებით</p>
+
+    <form [formGroup]="form" (ngSubmit)="showSelectedValues()">
+      <div class="search-container">
+        <div class="search-field">
+          <nz-select
+            nzAllowClear
+            nzPlaceHolder="რეგიონი"
+            [nzCustomTemplate]="defaultTemplate"
+            style="margin-left: 20px !important"
+            formControlName="region"
+            (ngModelChange)="getDistricts()"
+          >
+            <ng-container *ngFor="let item of regions">
+              <nz-option
+                nzLabel="{{ item.name }}"
+                nzValue="{{ item.id }}"
+              ></nz-option>
+            </ng-container>
+          </nz-select>
+          <ng-template #defaultTemplate let-selected>
+            <div class="ant-select-selection-item-content">
+              {{ selected.nzLabel }}
+            </div>
+          </ng-template>
+          <div class="divider"></div>
+
+          <nz-select
+            nzAllowClear
+            nzPlaceHolder="რაიონი"
+            nzMode="multiple"
+            [nzCustomTemplate]="multipleTemplate"
+            class="custom-multiple-select"
+            formControlName="districts"
+          >
+            <ng-container *ngFor="let item of districts">
+              <nz-option
+                nzLabel="{{ item.name }}"
+                nzValue="{{ item.name }}"
+              ></nz-option>
+            </ng-container>
+          </nz-select>
+          <ng-template #multipleTemplate let-selected>
+            <div class="ant-select-selection-item-content">
+              {{ selected.nzLabel }}
+            </div>
+          </ng-template>
+        </div>
+
+        <div class="checkbox-container">
+          <div class="checkbox">
+            <i class="pi pi-check"></i>
+          </div>
+          <span>მხოლოდ საჯარო სკოლები</span>
+        </div>
+      </div>
+      <button class="search-button" type="submit">
+        <i class="pi pi-search"></i>
+      </button>
+    </form>
+  </div>
+</div>

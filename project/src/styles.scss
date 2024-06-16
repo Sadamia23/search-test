@@ -1,0 +1,42 @@
+@import "ng-zorro-antd/ng-zorro-antd.min.css";
+@import "./../node_modules/primeng/resources/themes/lara-light-blue/theme.css";
+@import "./../node_modules/primeng/resources/primeng.css";
+@import "./../node_modules/primeicons/primeicons.css";
+
+.ant-modal-content {
+  max-width: 400px;
+}
+@media (max-width: 320px) {
+  .ant-modal-body {
+    padding: 10px;
+  }
+}
+
+.p-button {
+  margin-right: 0.5em;
+}
+
+.p-listbox {
+  margin-top: 1em;
+}
+.ant-select-selector {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  height: 100% !important;
+  display: flex;
+  align-items: center;
+  font-size: 18px !important;
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Disable horizontal scrolling */
+  flex-wrap: wrap; /* Wrap items */
+}
+nz-select {
+  height: 90% !important;
+  .ant-select-selection-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+   white-space: nowrap; /* Prevent selected items from wrapping */
+  }
+}
