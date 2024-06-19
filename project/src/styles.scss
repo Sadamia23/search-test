@@ -27,9 +27,9 @@
   display: flex;
   align-items: center;
   font-size: 18px !important;
-  overflow-y: auto; /* Enable vertical scrolling */
-  overflow-x: hidden; /* Disable horizontal scrolling */
-  flex-wrap: wrap; /* Wrap items */
+  overflow-y: auto; 
+  overflow-x: hidden; 
+  flex-wrap: wrap; 
 }
 nz-select {
   height: 90% !important;
@@ -37,6 +37,7 @@ nz-select {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-   white-space: nowrap; /* Prevent selected items from wrapping */
+    white-space: nowrap; 
   }
 }
+

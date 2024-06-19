@@ -21,11 +21,13 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SchoolsComponent } from './components/schools/schools.component';
+import { HomeComponent } from './components/home/home.component';
+import { DetailedFilterComponent } from './components/detailed-filter/detailed-filter.component';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, FilterComponent, InnerPageComponent, SchoolsComponent],
+  declarations: [AppComponent, FilterComponent, InnerPageComponent, SchoolsComponent, HomeComponent, DetailedFilterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

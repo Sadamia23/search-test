@@ -1,1 +1,66 @@
-<p>schools works!</p>
+<app-detailed-filter></app-detailed-filter>
+<section class="schools-section">
+  <p class="card-sec-title">
+    მოიძებნა <span>{{ totalSchools }}</span> სკოლა
+  </p>
+  <article class="cards">
+    <div class="school-detail" *ngFor="let item of currentElements">
+      <div class="school-type" *ngIf="item.schoolType == 'PUBLIC'">
+        <i class="pi pi-building"></i>
+        <span>საჯარო სკოლა</span>
+      </div>
+      <div class="school-type" *ngIf="item.schoolType == 'PRIVATE'">
+        <i class="pi pi-building"></i>
+        <span>კერძო სკოლა</span>
+      </div>
+      <div class="image">
+        <img
+          src="https://skolebi.emis.ge/back/imagedownload?attachmentId={{
+            item.imageAttachmentId
+          }}"
+          alt=""
+          *ngIf="item.imageAttachmentId; else altImage"
+        />
+        <ng-template #altImage>
+          <img
+            src="https://www.creativefabrica.com/wp-content/uploads/2020/07/16/Hotel-Building-Icon-Graphics-4642793-1.jpg"
+            alt=""
+          />
+        </ng-template>
+      </div>
+      <div class="location">
+        <i class="pi pi-map-marker"></i>
+        <span>{{ item.districtName }}, {{ item.regionName }}</span>
+      </div>
+      <h2 class="school-name">{{ item.schoolName }}</h2>
+      <div class="contact">
+        <article class="left">
+          <div class="icon">
+            <i class="pi pi-inbox"></i>
+          </div>
+          <div class="info">
+            <span>ელ. ფოსტა</span>
+            <a href="">{{ item.email }}</a>
+          </div>
+        </article>
+        <article class="right">
+          <div class="icon">
+            <i class="pi pi-building"></i>
+          </div>
+          <div class="info">
+            <span>ნომერი</span>
+            <a href="">{{ item.phoneNumber }}</a>
+          </div>
+        </article>
+      </div>
+      <button>დათვალიერება</button>
+    </div>
+  </article>
+  <div class="more-btn" *ngIf="!isLoading">
+    <button *ngIf="showMore" (click)="loadMore()">მაჩვენე მეტი</button>
+  </div>
+
+  <div class="spinner" *ngIf="isLoading">
+    <h1>Loading...</h1>
+  </div>
+</section>

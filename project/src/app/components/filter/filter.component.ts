@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NzIconService } from 'ng-zorro-antd/icon';
 import { IDistrict, IRegions } from '../../interfaces/regions.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RegionService } from '../../services/region.service';
@@ -14,65 +13,18 @@ import { Router } from '@angular/router';
 export class FilterComponent {
   form!: FormGroup;
   selectedRegion!: number;
-  selectedDistricts: string[] = [];
-  regions: IRegions[] = [
-    {
-      id: 1009,
-      name: 'თბილისი',
-    },
-    {
-      id: 1000,
-      name: 'აფხაზეთი',
-    },
-    {
-      id: 1005,
-      name: 'აჭარა',
-    },
-    {
-      id: 1006,
-      name: 'გურია',
-    },
-    {
-      id: 1007,
-      name: 'იმერეთი',
-    },
-    {
-      id: 1003,
-      name: 'კახეთი',
-    },
-    {
-      id: 1004,
-      name: 'მცხეთა-მთიანეთი',
-    },
-    {
-      id: 1011,
-      name: 'რაჭა-ლეჩხუმი და ქვემო სვანეთი',
-    },
-    {
-      id: 1008,
-      name: 'სამეგრელო-ზემო სვანეთი',
-    },
-    {
-      id: 1001,
-      name: 'სამცხე-ჯავახეთი',
-    },
-    {
-      id: 1002,
-      name: 'ქვემო ქართლი',
-    },
-    {
-      id: 1010,
-      name: 'შიდა ქართლი',
-    },
-  ];
+  regions: IRegions[] = [];
 
   districts: IDistrict[] = [];
   constructor(
     private fb: FormBuilder,
     private _RegionService: RegionService,
-    private _resultService: ResultService,
+    public resultService: ResultService,
     private router: Router
   ) {
+    this._RegionService.getRegions().subscribe((regions) => {
+      this.regions = regions;
+    });
     this.form = this.fb.group({
       region: [null],
       districts: [[]],
@@ -85,19 +37,16 @@ export class FilterComponent {
     });
 
     this.form.get('districts')?.valueChanges.subscribe((selectedDistricts) => {
-      this.selectedDistricts = selectedDistricts;
+      this.resultService.selectedDistricts = selectedDistricts;
     });
   }
 
   showSelectedValues() {
-    console.log('Selected Region:', this.selectedRegion);
-    console.log('Selected Districts:', this.selectedDistricts);
-    let pages = 0;
-    this._resultService
+    this.resultService
       .getResultsFromAPI(this.selectedRegion)
       .subscribe((result) => {
-        this._resultService.setResults(result);
-        this._resultService.id = this.selectedRegion;
+        this.resultService.setResults(result);
+        this.resultService.id = this.selectedRegion;
         this.router.navigate(['/schools']);
       });
   }
@@ -111,16 +60,10 @@ export class FilterComponent {
       });
   }
 }
-// for (let i = 1; 1 <= pages; i++) {
-//   this._SchoolService
-//     .getResults(this.selectedRegion, i)
-//     .subscribe((data) => {
-//       console.log(data);
-//     });
-// }
+
 // https://skolebi.emis.ge/back/school/region
 // https://skolebi.emis.ge/back/school/search?page=1&size=24&regions=1010
-// https://skolebi.emis.ge/back/school?page=1&size=24&search=ოზურგეთი
+// ც
 // https://skolebi.emis.ge/back/school/search/378
 // https://skolebi.emis.ge/back/school/district?regionId=1009
 // https://skolebi.emis.ge/back/school/educationprogram

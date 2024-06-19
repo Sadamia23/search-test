@@ -51,7 +51,11 @@
         </div>
 
         <div class="checkbox-container">
-          <div class="checkbox">
+          <div
+            class="checkbox"
+            (click)="resultService.toggleOnlyPublicButton()"
+            [ngClass]="{ showOnlyPublicActive: resultService.showOnlyPublic }"
+          >
             <i class="pi pi-check"></i>
           </div>
           <span>მხოლოდ საჯარო სკოლები</span>

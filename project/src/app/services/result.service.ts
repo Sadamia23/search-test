@@ -7,7 +7,11 @@ import { ISchoolRoot } from '../interfaces/school.model';
 })
 export class ResultService {
   schoolsResult!: ISchoolRoot;
-  id!:number
+  showOnlyPublic: boolean = false;
+  showOnlyPrivate: boolean = false;
+  selectedDistricts: string[] = [];
+
+  id!: number;
   constructor(private _http: HttpClient) {}
   getResultsFromAPI(regionID: number, i: number = 1) {
     const targetUrl = `https://skolebi.emis.ge/back/school/search?page=${i}&size=24&regions=${regionID}`;
@@ -18,5 +22,12 @@ export class ResultService {
   setResults(result: ISchoolRoot) {
     this.schoolsResult = result;
   }
-
+  toggleOnlyPublicButton() {
+    this.showOnlyPrivate = false
+    this.showOnlyPublic = !this.showOnlyPublic;
+  }
+  toggleOnlyPrivateButton(){
+    this.showOnlyPublic = false;
+    this.showOnlyPrivate = !this.showOnlyPrivate
+  }
 }

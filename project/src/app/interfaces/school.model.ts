@@ -3,7 +3,7 @@ export interface ISchoolRoot {
   totalItems: number;
 }
 
-interface ISchool {
+export interface ISchool {
   id: number;
   schoolName: string;
   regionName: string;
@@ -11,4 +11,5 @@ interface ISchool {
   email: string;
   phoneNumber: string;
   schoolType: 'PUBLIC' | 'PRIVATE';
+  imageAttachmentId: number;
 }
