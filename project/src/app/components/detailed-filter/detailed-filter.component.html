@@ -1,0 +1,94 @@
+<section class="schools">
+  <h1 class="title">
+    <span>მოძებნე სკოლა</span>
+    საქართველოს მასშტაბით
+  </h1>
+
+  <form (ngSubmit)="loadSelectedValues()" [formGroup]="form" class="filter">
+    <div class="filter-title">
+      <p>დეტალური ძებნა</p>
+      <span
+      >სკოლის მოძებნა შესაძლებელია საძიებო ველისა და რუკის დახმარებით</span
+      >
+    </div>
+    <div class="filters-wrapper">
+      <div class="filter-item region">
+        <nz-select
+          (ngModelChange)="getDistricts()"
+          [nzCustomTemplate]="defaultTemplate"
+          formControlName="region"
+          nzAllowClear
+          nzPlaceHolder="რეგიონი"
+          style="margin-left: 20px !important"
+        >
+          <ng-container *ngFor="let item of regions">
+            <nz-option nzLabel="{{ item.name }}" nzValue="{{ item.id }}">
+            </nz-option>
+          </ng-container>
+        </nz-select>
+        <ng-template #defaultTemplate let-selected>
+          <div class="ant-select-selection-item-content">
+            {{ selected.nzLabel }}
+          </div>
+        </ng-template>
+
+      </div>
+      <div class="filter-item district">
+        <nz-select
+          [nzCustomTemplate]="multipleTemplate"
+          class="custom-multiple-select"
+          formControlName="districts"
+          nzAllowClear
+          nzMode="multiple"
+          nzPlaceHolder="რაიონი"
+        >
+          <ng-container *ngFor="let item of districts">
+            <nz-option
+              nzLabel="{{ item.name }}"
+              nzValue="{{ item.name }}"
+            ></nz-option>
+          </ng-container>
+        </nz-select>
+        <ng-template #multipleTemplate let-selected>
+          <div class="ant-select-selection-item-content">
+            {{ selected.nzLabel }}
+          </div>
+        </ng-template>
+      </div>
+      <div class="filter-item educational-program"></div>
+      <div class="filter-item sector"></div>
+      <div class="filter-item search"></div>
+    </div>
+    <div class="bottom-filter">
+      <div class="school-type-container">
+        <div class="public-type">
+          <div
+            (click)="resultService.toggleOnlyPublicButton()"
+            [ngClass]="{ showOnlyPublicActive: resultService.showOnlyPublic }"
+            class="checkbox"
+          >
+            <i class="pi pi-check"></i>
+          </div>
+          <span>მხოლოდ საჯარო სკოლები</span>
+        </div>
+        <div class="private-type">
+          <div
+            (click)="resultService.toggleOnlyPrivateButton()"
+            [ngClass]="{ showOnlyPrivateActive: resultService.showOnlyPrivate }"
+            class="checkbox"
+          >
+            <i class="pi pi-check"></i>
+          </div>
+          <span>მხოლოდ კერძო სკოლები</span>
+        </div>
+      </div>
+      <div class="clear-search">
+        <button class="clear">გასუფთავება</button>
+        <button class="search">
+          <i class="pi pi-search"></i>
+          <span>ძებნა</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</section>
